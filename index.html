@@ -551,38 +551,43 @@
   /* ---------- PHONE ---------- */
   @media (max-width: 600px) {
     .wrap { padding: 0 20px; }
-    .nav-mark { font-size: 0.85rem; flex-shrink: 0; position: relative; z-index: 10; }
-    .nav-toggle { display: flex; position: relative; z-index: 10; }
+    .nav-mark { font-size: 0.85rem; flex-shrink: 0; }
+    .nav-toggle { display: flex; }
     .nav-links {
-      position: fixed;
-      inset: 0;
-      z-index: 5;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
+      gap: 0;
       background: var(--paper);
-      padding: 80px 24px 48px;
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 10px 20px rgba(43, 36, 34, 0.06);
+      padding: 0 20px;
+      max-height: 0;
       opacity: 0;
       visibility: hidden;
+      overflow: hidden;
       pointer-events: none;
-      transform: translateY(10px);
-      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+      transform: translateY(-6px);
+      transition: max-height 0.32s ease, opacity 0.24s ease, transform 0.32s ease, padding 0.32s ease, visibility 0.32s;
     }
     .nav-links.open {
+      max-height: 70vh;
       opacity: 1;
       visibility: visible;
       pointer-events: auto;
       transform: translateY(0);
+      padding: 4px 20px 14px;
     }
     .nav-links a {
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: 1.7rem;
+      font-size: 0.95rem;
       color: var(--ink);
-      padding: 14px 0;
+      padding: 13px 2px;
+      border-bottom: 1px solid var(--line);
     }
-    .nav-links a:hover { color: var(--rose); }
+    .nav-links a:last-child { border-bottom: none; }
     header.hero { padding: 52px 0 44px; }
     .hero-photo-wrap { width: 150px; }
     section { padding: 52px 0; }
@@ -854,19 +859,14 @@
       menu.classList.remove('open');
       btn.setAttribute('aria-expanded', 'false');
       btn.setAttribute('aria-label', 'Open menu');
-      document.body.style.overflow = '';
     }
     btn.addEventListener('click', function () {
       var open = menu.classList.toggle('open');
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
       btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-      document.body.style.overflow = open ? 'hidden' : '';
     });
     menu.querySelectorAll('a').forEach(function (a) {
       a.addEventListener('click', close);
-    });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') close();
     });
   })();
 </script>

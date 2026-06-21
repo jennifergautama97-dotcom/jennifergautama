@@ -519,15 +519,31 @@
   }
 
   /* ---------- RESPONSIVE ---------- */
-  @media (max-width: 720px) {
+  /* ---------- TABLET (incl. iPad portrait) ---------- */
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+    .hero-photo-wrap { order: -1; width: 180px; aspect-ratio: 4/4.6; }
+    .projects { grid-template-columns: 1fr; }
+    section { padding: 64px 0; }
+  }
+
+  /* ---------- PHONE ---------- */
+  @media (max-width: 600px) {
     .wrap { padding: 0 20px; }
-    .nav-mark { font-size: 0.78rem; }
-    .nav-links { gap: 16px; }
-    .nav-links a { font-size: 0.74rem; }
-    header.hero { padding: 64px 0 48px; }
-    .hero-grid { grid-template-columns: 1fr; gap: 28px; }
-    .hero-photo-wrap { order: -1; width: 140px; aspect-ratio: 4/4.6; }
-    section { padding: 56px 0; }
+    nav .wrap { gap: 14px; }
+    .nav-mark { font-size: 0.8rem; flex-shrink: 0; }
+    .nav-links {
+      gap: 16px;
+      min-width: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .nav-links::-webkit-scrollbar { display: none; }
+    .nav-links a { font-size: 0.78rem; white-space: nowrap; }
+    header.hero { padding: 52px 0 44px; }
+    .hero-photo-wrap { width: 150px; }
+    section { padding: 52px 0; }
     .elevation { padding-left: 24px; }
     .elevation::before { left: 0; }
     .level-mark {
@@ -541,7 +557,6 @@
     .level-tick { left: -1px; }
     .level-dot { left: -4.5px; }
     .level-content { margin-left: 0; padding-left: 20px; }
-    .projects { grid-template-columns: 1fr; }
     .design-strip { grid-template-columns: 1fr; }
     .section-head { flex-direction: column; gap: 8px; align-items: flex-start; }
   }

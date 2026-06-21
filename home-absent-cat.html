@@ -131,6 +131,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 18px;
+    align-items: start;
   }
   .gallery-item {
     border: 1px solid var(--line);
@@ -139,8 +140,6 @@
     background: var(--paper-dim);
   }
   .gallery-item img { width: 100%; display: block; }
-  .gallery-item:not(.wide) { aspect-ratio: 3 / 2; }
-  .gallery-item:not(.wide) img { height: 100%; object-fit: cover; }
   .gallery-item.wide { grid-column: 1 / -1; }
 
   /* ---------- placeholder (remove when images are added) ---------- */
@@ -208,8 +207,7 @@
     </div>
 
     <div class="proj-hero-shot">
-      <!-- Replace with: <img src="images/design/absent-cat-hero.jpg" alt="Home with an Absent Cat interior"> -->
-      <div class="ph">HERO IMAGE</div>
+      <img src="images/design/absent-cat-hero.jpg" alt="Home with an Absent Cat interior">
     </div>
   </header>
 
@@ -219,11 +217,14 @@
 
   <section class="proj-gallery-section">
     <div class="proj-gallery">
-      <!-- Replace each with: <div class="gallery-item"><img src="images/design/absent-cat-1.jpg" alt="..."></div> -->
-      <div class="gallery-item"><div class="ph">IMAGE 1</div></div>
-      <div class="gallery-item"><div class="ph">IMAGE 2</div></div>
-      <div class="gallery-item"><div class="ph">IMAGE 3</div></div>
-      <div class="gallery-item"><div class="ph">IMAGE 4</div></div>
+      <div class="gallery-item"><img src="images/design/absent-cat-2.jpg" alt="Home with an Absent Cat interior"></div>
+      <div class="gallery-item"><img src="images/design/absent-cat-4.jpg" alt="Home with an Absent Cat interior"></div>
+      <div class="gallery-item"><img src="images/design/absent-cat-5.jpg" alt="Home with an Absent Cat interior"></div>
+      <div class="gallery-item"><img src="images/design/absent-cat-6.jpg" alt="Home with an Absent Cat interior"></div>
+      <div class="gallery-item"><img src="images/design/absent-cat-7.jpg" alt="Home with an Absent Cat interior"></div>
+      <div class="gallery-item"><img src="images/design/absent-cat-8.jpg" alt="Home with an Absent Cat interior"></div>
+      <div class="gallery-item"><img src="images/design/absent-cat-1.jpg" alt="Home with an Absent Cat interior"></div>
+      <div class="gallery-item"><img src="images/design/absent-cat-3.jpg" alt="Home with an Absent Cat interior"></div>
     </div>
   </section>
 

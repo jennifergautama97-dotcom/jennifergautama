@@ -128,18 +128,20 @@
   /* ---------- GALLERY ---------- */
   .proj-gallery-section { padding: 48px 0; }
   .proj-gallery {
-    column-count: 2;
-    column-gap: 18px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
   }
   .gallery-item {
-    break-inside: avoid;
-    margin-bottom: 18px;
     border: 1px solid var(--line);
     border-radius: 4px;
     overflow: hidden;
     background: var(--paper-dim);
   }
   .gallery-item img { width: 100%; display: block; }
+  .gallery-item:not(.wide) { aspect-ratio: 3 / 2; }
+  .gallery-item:not(.wide) img { height: 100%; object-fit: cover; }
+  .gallery-item.wide { grid-column: 1 / -1; }
 
   /* ---------- placeholder (remove when images are added) ---------- */
   .ph {
@@ -179,7 +181,7 @@
 
   /* ---------- RESPONSIVE ---------- */
   @media (max-width: 720px) {
-    .proj-gallery { column-count: 1; }
+    .proj-gallery { grid-template-columns: 1fr; }
   }
   a:focus-visible { outline: 2px solid var(--rose); outline-offset: 3px; }
 </style>
@@ -220,13 +222,12 @@
       <div class="gallery-item"><img src="images/design/cafe-beth-1.jpg" alt="Cafe Beth interior"></div>
       <div class="gallery-item"><img src="images/design/cafe-beth-2.jpg" alt="Cafe Beth interior"></div>
       <div class="gallery-item"><img src="images/design/cafe-beth-3.jpg" alt="Cafe Beth interior"></div>
-      <div class="gallery-item"><img src="images/design/cafe-beth-4.jpg" alt="Cafe Beth interior"></div>
       <div class="gallery-item"><img src="images/design/cafe-beth-5.jpg" alt="Cafe Beth interior"></div>
       <div class="gallery-item"><img src="images/design/cafe-beth-6.jpg" alt="Cafe Beth interior"></div>
       <div class="gallery-item"><img src="images/design/cafe-beth-7.jpg" alt="Cafe Beth interior"></div>
       <div class="gallery-item"><img src="images/design/cafe-beth-8.jpg" alt="Cafe Beth interior"></div>
       <div class="gallery-item"><img src="images/design/cafe-beth-9.jpg" alt="Cafe Beth interior"></div>
-      <div class="gallery-item"><img src="images/design/cafe-beth-10.jpg" alt="Cafe Beth interior"></div>
+      <div class="gallery-item wide"><img src="images/design/cafe-beth-10.jpg" alt="Cafe Beth interior"></div>
     </div>
   </section>
 

@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HelloCher — Case Study — Jennifer Gautama</title>
+<style>
+  :root {
+    --paper: #FAF6F4;
+    --paper-dim: #F2E9E5;
+    --ink: #2B2422;
+    --ink-soft: #897A75;
+    --line: #E8DCD6;
+    --rose: #B26A5E;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--rose); color: var(--paper); }
+  a { color: inherit; text-decoration: none; }
+
+  .label {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+
+  /* ---------- NAV (top, matches main site) ---------- */
+  nav.topnav {
+    position: sticky;
+    top: 0;
+    background: rgba(250, 246, 244, 0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+    z-index: 50;
+  }
+  .topnav-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+  }
+  .back-link {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .back-link:hover { color: var(--rose); }
+  .topnav-mark {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  /* ---------- LAYOUT ---------- */
+  .case-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  /* ---------- SIDE NAV (table of contents) ---------- */
+  .toc {
+    position: sticky;
+    top: 96px;
+    padding-top: 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .toc a {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    padding: 7px 0 7px 14px;
+    border-left: 2px solid var(--line);
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .toc a:hover, .toc a.active {
+    color: var(--ink);
+    border-left-color: var(--rose);
+  }
+
+  /* ---------- HERO ---------- */
+  .case-hero {
+    padding-top: 64px;
+    padding-bottom: 56px;
+  }
+  .case-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--rose);
+    border: 1px solid var(--rose);
+    padding: 4px 10px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+  .case-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    max-width: 14ch;
+    margin-bottom: 18px;
+  }
+  .case-dek {
+    font-size: 1.08rem;
+    color: var(--ink-soft);
+    max-width: 60ch;
+    line-height: 1.6;
+  }
+  .case-role-line {
+    margin-top: 16px;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    max-width: 62ch;
+    line-height: 1.65;
+  }
+  .case-meta {
+    margin-top: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+  }
+  .case-meta-item { font-size: 0.82rem; color: var(--ink-soft); }
+  .case-meta-item strong { display: block; color: var(--ink); font-size: 0.95rem; font-weight: 600; margin-top: 2px; }
+
+  .case-hero-shot {
+    margin-top: 48px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--paper-dim);
+  }
+  .case-hero-shot img { width: 100%; display: block; }
+
+  /* ---------- SECTIONS ---------- */
+  .case-section {
+    padding: 56px 0;
+    border-bottom: 1px solid var(--line);
+    scroll-margin-top: 88px;
+  }
+  .case-section:last-of-type { border-bottom: none; }
+  .case-section h2 {
+    font-family: Georgia, serif;
+    font-size: clamp(1.4rem, 2.6vw, 1.8rem);
+    letter-spacing: -0.01em;
+    margin-bottom: 22px;
+  }
+  .case-section h3 {
+    font-family: Georgia, serif;
+    font-size: 1.15rem;
+    margin: 28px 0 10px;
+  }
+  .case-section p {
+    font-size: 0.98rem;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    max-width: 68ch;
+  }
+  .case-section p + p { margin-top: 14px; }
+  .case-section ul {
+    margin-top: 10px;
+    padding-left: 20px;
+  }
+  .case-section li {
+    font-size: 0.98rem;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin-bottom: 8px;
+    max-width: 64ch;
+  }
+  .case-section strong { color: var(--ink); font-weight: 600; }
+
+  /* ---------- BUILD STEPS ---------- */
+  .build-step {
+    margin-bottom: 48px;
+  }
+  .build-step:last-child { margin-bottom: 0; }
+  .build-step-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .build-step-num {
+    font-family: Georgia, serif;
+    font-size: 0.78rem;
+    color: var(--rose);
+    border: 1px solid var(--rose);
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .build-step-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
+  /* ---------- SCREENSHOT FRAMES ---------- */
+  .shot-frame {
+    margin-top: 18px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--paper-dim);
+  }
+  .shot-chrome {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  .shot-chrome span {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--line);
+  }
+  .shot-frame img { width: 100%; display: block; }
+
+  .shot-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .shot-row .shot-frame { margin-top: 0; }
+  .shot-caption {
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  .flow-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 18px;
+  }
+  .flow-row .shot-frame { margin-top: 0; }
+  .flow-step-num {
+    font-size: 0.7rem;
+    color: var(--rose);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+
+  /* ---------- STATS ---------- */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 24px;
+  }
+  .stat-card {
+    border: 1px solid var(--line);
+    background: var(--paper-dim);
+    padding: 24px;
+  }
+  .stat-num {
+    font-family: Georgia, serif;
+    font-size: 2rem;
+    color: var(--ink);
+  }
+  .stat-label {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    margin-top: 6px;
+  }
+
+  /* ---------- QUOTE ---------- */
+  .case-quote {
+    border-left: 2px solid var(--rose);
+    padding-left: 22px;
+    margin: 24px 0;
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--ink);
+    max-width: 60ch;
+    line-height: 1.6;
+  }
+
+  /* ---------- PRICING TABLE ---------- */
+  .tier-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .tier-card {
+    border: 1px solid var(--line);
+    padding: 24px;
+  }
+  .tier-card.pro { border-color: var(--rose); background: var(--paper-dim); }
+  .tier-name { font-family: Georgia, serif; font-size: 1.1rem; margin-bottom: 10px; }
+  .tier-card ul { padding-left: 18px; margin-top: 8px; }
+  .tier-card li { font-size: 0.88rem; }
+
+  /* ---------- NO LIST ---------- */
+  .no-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 18px;
+  }
+  .no-card {
+    border: 1px dashed var(--line);
+    padding: 22px;
+  }
+  .no-card-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--rose);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  /* ---------- FOOTER NAV ---------- */
+  .case-footer-nav {
+    padding: 56px 0 88px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .btn {
+    display: inline-block;
+    padding: 12px 22px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 2px;
+  }
+  .btn-primary { background: var(--ink); color: var(--paper); }
+  .btn-primary:hover { background: var(--rose); }
+  .btn-secondary { border: 1px solid var(--ink); color: var(--ink); }
+  .btn-secondary:hover { border-color: var(--rose); color: var(--rose); }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 860px) {
+    .case-wrap { grid-template-columns: 1fr; gap: 0; }
+    .toc { display: none; }
+    .case-hero { padding-top: 40px; }
+    .shot-row { grid-template-columns: 1fr; }
+    .flow-row { grid-template-columns: repeat(2, 1fr); }
+    .stat-grid { grid-template-columns: 1fr; }
+    .tier-grid { grid-template-columns: 1fr; }
+    .no-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+
+  a:focus-visible { outline: 2px solid var(--rose); outline-offset: 3px; }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-wrap">
+    <a class="back-link" href="index.html">&larr; Jennifer Gautama</a>
+    <div class="topnav-mark">HelloCher case study</div>
+  </div>
+</nav>
+
+<div class="case-wrap">
+
+  <aside class="toc">
+    <a href="#problem">The problem</a>
+    <a href="#who">Who it was for</a>
+    <a href="#build">What I built</a>
+    <a href="#launch">What launch told me</a>
+    <a href="#pricing">Free vs. Pro</a>
+    <a href="#no">What I said no to</a>
+    <a href="#outcome">Outcome</a>
+    <a href="#different">What I'd change</a>
+  </aside>
+
+  <div>
+    <header class="case-hero">
+      <span class="case-tag">AI · EdTech</span>
+      <h1 class="case-title">HelloCher</h1>
+      <p class="case-dek">An AI study platform for Singapore A-Level General Paper (GP) students.</p>
+      <p class="case-role-line">I owned the user research and UX/UI, ran the launch, and did the user outreach myself, talking to students one by one. What we built and what we charged for, TC and I worked out together off the back of those conversations, and TC, a software engineer, did the building.</p>
+
+      <div class="case-meta">
+        <div class="case-meta-item">Role<strong>Co-founder, Product</strong></div>
+        <div class="case-meta-item">Timeline<strong>Feb 2026 — Present</strong></div>
+        <div class="case-meta-item">Reach<strong>1,100 visitors / 3 weeks</strong></div>
+      </div>
+
+      <div class="case-hero-shot">
+        <img src="images/hellocher-home.png" alt="HelloCher essay library homepage">
+      </div>
+    </header>
+
+    <section class="case-section" id="problem">
+      <h2>The problem</h2>
+      <p>GP is one of the hardest subjects to study for, and not because the content is dense. There is no clean right answer, so a student writes an essay, hands it in, and waits a week for a grade and a few margin notes that do not actually tell them what to fix. The feedback loop is slow and scarce, and it all bottlenecks on one tutor who does not have time to mark everything.</p>
+      <p>It gets worse from there. A strong GP essay leans on a wide bank of real-world examples, which means students are also meant to keep up with the news. Most of them rank GP last against subjects that feel more scoreable, so that reading never happens.</p>
+      <p>So the gap was twofold: students could not get fast feedback on their own writing, and they could not easily build the example bank a good essay needs.</p>
+    </section>
+
+    <section class="case-section" id="who">
+      <h2>Who it was for</h2>
+      <p>Singapore JC students sitting GP, mostly studying alone and under exam pressure. A few things surfaced fast once I started talking to them. They do not get enough practice, and even when they want to practise, their teachers do not have the time to mark it. They know examples matter but struggle to gather enough of them. And they deprioritise GP, so the news reading that would feed those examples almost never gets done.</p>
+    </section>
+
+    <section class="case-section" id="build">
+      <h2>What I built, and the order I built it in</h2>
+      <p>I did not start with the obvious feedback feature. I started with the cheapest thing that could be useful and let the users pull the rest of the roadmap.</p>
+
+      <div class="build-step">
+        <div class="build-step-label">
+          <div class="build-step-num">1</div>
+          <div class="build-step-title">Sample essays first, because it was the lowest-effort thing to ship</div>
+        </div>
+        <p>We launched with a library of model essays built from ten years of past papers, prelim questions, and A-Level questions. It cost us very little to put up and gave students something useful on day one. Then I went back to the students who showed up and asked what they actually valued. The answer was not only the content, it was the formatting. The essays were broken into clean, readable paragraphs with the different stances laid out clearly, counterarguments flagged, and each paragraph tagged by the job it was doing, whether that was to explain, to give an example, or to link back to the question. Students could see how an argument is actually built, and several told me they were picking up brand new examples just from reading.</p>
+        <div class="shot-frame">
+          <div class="shot-chrome"><span></span><span></span><span></span></div>
+          <img src="images/hellocher-essay.png" alt="Sample essay showing for and against arguments side by side">
+        </div>
+        <p class="shot-caption">A sample essay, broken into tagged, structured arguments — students said the formatting taught them as much as the content.</p>
+      </div>
+
+      <div class="build-step">
+        <div class="build-step-label">
+          <div class="build-step-num">2</div>
+          <div class="build-step-title">A notes generator, because they kept asking for more examples</div>
+        </div>
+        <p>Good GP essays run on a deep bank of examples, and students wanted more than any single essay could hold. So we built a generator that produces around thirty extra examples on top of a given essay, in point form, each with a note on how it can be used.</p>
+        <div class="shot-row">
+          <div class="shot-frame">
+            <div class="shot-chrome"><span></span><span></span><span></span></div>
+            <img src="images/hellocher-notes-1.png" alt="Generated study notes showing how to approach the question and key terms">
+          </div>
+          <div class="shot-frame">
+            <div class="shot-chrome"><span></span><span></span><span></span></div>
+            <img src="images/hellocher-notes-2.png" alt="Generated notes showing counter-arguments and rebuttals">
+          </div>
+        </div>
+      </div>
+
+      <div class="build-step">
+        <div class="build-step-label">
+          <div class="build-step-num">3</div>
+          <div class="build-step-title">Instant essay feedback, once the practice gap was clear</div>
+        </div>
+        <p>More conversations made the real bottleneck obvious. Students were not practising enough, and there was no one with time to mark what they did write. So we shipped instant feedback, where a student puts in their own arguments and gets a response straight away, and can keep practising without waiting on a teacher.</p>
+        <div class="flow-row">
+          <div>
+            <div class="flow-step-num">PICK A TOPIC</div>
+            <div class="shot-frame">
+              <div class="shot-chrome"><span></span><span></span><span></span></div>
+              <img src="images/hellocher-feedback-2.png" alt="Ask Cher landing screen with Argument Builder and Essay Builder">
+            </div>
+          </div>
+          <div>
+            <div class="flow-step-num">PICK A CATEGORY</div>
+            <div class="shot-frame">
+              <div class="shot-chrome"><span></span><span></span><span></span></div>
+              <img src="images/hellocher-feedback-1.png" alt="Topic picker grid by category">
+            </div>
+          </div>
+          <div>
+            <div class="flow-step-num">PICK A QUESTION</div>
+            <div class="shot-frame">
+              <div class="shot-chrome"><span></span><span></span><span></span></div>
+              <img src="images/hellocher-feedback-3.png" alt="List of past GP questions to choose from">
+            </div>
+          </div>
+          <div>
+            <div class="flow-step-num">WRITE & GET FEEDBACK</div>
+            <div class="shot-frame">
+              <div class="shot-chrome"><span></span><span></span><span></span></div>
+              <img src="images/hellocher-feedback-4.png" alt="Argument input form with prompts for three arguments and a rebuttal">
+            </div>
+          </div>
+        </div>
+        <p class="shot-caption">The full Ask Cher flow — pick a topic, pick a question, build your case, get feedback. Each step was scoped tight so a student could finish a practice round in one sitting.</p>
+      </div>
+
+      <div class="build-step">
+        <div class="build-step-label">
+          <div class="build-step-num">4</div>
+          <div class="build-step-title">A news page, because examples go stale and GP keeps losing the time fight</div>
+        </div>
+        <p>Students told me they never get round to reading the news and always put GP last. So we built a page that pulls current affairs and shows which essay types each story can support, giving them fresh material the notes generator would not already cover.</p>
+        <div class="shot-frame">
+          <div class="shot-chrome"><span></span><span></span><span></span></div>
+          <img src="images/hellocher-news.png" alt="GP News page with current affairs tagged to essay categories">
+        </div>
+      </div>
+
+      <p style="margin-top: 32px;">The thread running through all of it is that I shipped the smallest useful thing first, then let each round of user conversations decide what came next, instead of building the whole vision up front and hoping it landed.</p>
+    </section>
+
+    <section class="case-section" id="launch">
+      <h2>What the launch told me</h2>
+      <p>We launched the product for free and shared it once on Reddit. That single post brought in 800+ students with no ad spend, and we reached ~1,100 unique visitors in the first three weeks.</p>
+      <p>There wasn't a big "distribution strategy" — we just tried one channel to see if anyone cared. The response proved the problem was real and common, which gave me the confidence to start testing whether students would pay for it.</p>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-num">1,100</div>
+          <div class="stat-label">Unique visitors in 3 weeks</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">800+</div>
+          <div class="stat-label">From one organic Reddit post</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">$0</div>
+          <div class="stat-label">Ad spend</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" id="pricing">
+      <h2>What stayed free, and what sat behind Pro</h2>
+      <p>We launched fully free on purpose. The first thing I wanted to know was whether other students struggled with GP the way we had, and the Reddit response made it clear they did. But a problem being common is not the same as a problem being urgent, so I introduced pricing to tell the difference between a hair-on-fire problem people pay to fix and a nice-to-have they will use only while it is free.</p>
+      <div class="tier-grid">
+        <div class="tier-card">
+          <div class="tier-name">Free</div>
+          <ul>
+            <li>A couple of sample essays per topic</li>
+            <li>Fixed practice questions</li>
+            <li>3 Ask Cher consultations a month</li>
+            <li>3 lifetime tries of notes generator &amp; essay builder</li>
+          </ul>
+        </div>
+        <div class="tier-card pro">
+          <div class="tier-name">Pro</div>
+          <ul>
+            <li>Full essay bank across every year</li>
+            <li>Open question input, not just fixed prompts</li>
+            <li>Current affairs examples attached to each argument</li>
+            <li>Access to unseen questions</li>
+            <li>Saved consultation history</li>
+          </ul>
+        </div>
+      </div>
+      <p style="margin-top: 20px;">The line was drawn so a student could feel the value of every tool before hitting a wall, and so the wall fell exactly where casual use turns into real reliance.</p>
+    </section>
+
+    <section class="case-section" id="no">
+      <h2>What I deliberately did not build</h2>
+      <div class="no-grid">
+        <div class="no-card">
+          <div class="no-card-label">No to other subjects</div>
+          <p style="margin: 0;">Plenty of students asked us to cover History and Geography. GP is the one subject nearly every JC student takes, which made it the widest problem we could solve well. Spreading across other subjects would have traded a sharp, universal product for a thin and scattered one before we had even nailed GP.</p>
+        </div>
+        <div class="no-card">
+          <div class="no-card-label">No to memorisable essays</div>
+          <p style="margin: 0;">Students asked for essays laid out to be easily memorised. I kept the sample essays as something to learn from rather than reproduce — the point was to show how an argument is constructed, not to hand a student something to recite.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section" id="outcome">
+      <h2>Outcome</h2>
+      <ul>
+        <li>Around 1,100 unique visitors within three weeks of launch, 800+ from one organic Reddit post, no ad spend. Currently have 4 paying customers.</li>
+        <li>Early paying subscribers on the Pro tier, which validated willingness to pay and not just willingness to use.</li>
+      </ul>
+      <div class="case-quote">"I used HelloCher to prepare for a SUSS university interview question. Because I wasn't familiar with Singapore's education system — I'd only learned essay-writing through TOEFL — I used the model essays to learn the GP style and build my own structure."</div>
+      <p>— A paying user, on a use case I hadn't anticipated.</p>
+    </section>
+
+    <section class="case-section" id="different">
+      <h2>What I would do differently</h2>
+      <p>We launched free and kept building — the notes generator, then the news page — before I knew whether anyone would pay. Reddit told me the problem was common, but common is not urgent. Next time I would test willingness to pay earlier, before building that much free product. Real validation is people paying. Anyone will use a free tool. Paying is what separates a genuine want from a nice-to-have.</p>
+    </section>
+
+    <div class="case-footer-nav">
+      <a class="btn btn-secondary" href="index.html#projects">&larr; Back to projects</a>
+      <a class="btn btn-primary" href="index.html#contact">Get in touch</a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const sections = document.querySelectorAll('.case-section');
+  const tocLinks = document.querySelectorAll('.toc a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        tocLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(section => observer.observe(section));
+</script>
+
+</body>
+</html>

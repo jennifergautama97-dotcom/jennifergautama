@@ -128,18 +128,18 @@
   /* ---------- GALLERY ---------- */
   .proj-gallery-section { padding: 48px 0; }
   .proj-gallery {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
+    column-count: 2;
+    column-gap: 18px;
   }
   .gallery-item {
+    break-inside: avoid;
+    margin-bottom: 18px;
     border: 1px solid var(--line);
     border-radius: 4px;
     overflow: hidden;
     background: var(--paper-dim);
   }
   .gallery-item img { width: 100%; display: block; }
-  .gallery-item.wide { grid-column: 1 / -1; }
 
   /* ---------- placeholder (remove when images are added) ---------- */
   .ph {
@@ -179,7 +179,7 @@
 
   /* ---------- RESPONSIVE ---------- */
   @media (max-width: 720px) {
-    .proj-gallery { grid-template-columns: 1fr; }
+    .proj-gallery { column-count: 1; }
   }
   a:focus-visible { outline: 2px solid var(--rose); outline-offset: 3px; }
 </style>
@@ -207,8 +207,7 @@
     </div>
 
     <div class="proj-hero-shot">
-      <!-- Replace with: <img src="images/design/cafe-beth-hero.jpg" alt="Cafe Beth interior"> -->
-      <div class="ph">HERO IMAGE</div>
+      <img src="images/design/cafe-beth-hero.jpg" alt="Cafe Beth interior">
     </div>
   </header>
 
@@ -218,11 +217,16 @@
 
   <section class="proj-gallery-section">
     <div class="proj-gallery">
-      <!-- Replace each with: <div class="gallery-item"><img src="images/design/cafe-beth-1.jpg" alt="..."></div> -->
-      <div class="gallery-item"><div class="ph">IMAGE 1</div></div>
-      <div class="gallery-item"><div class="ph">IMAGE 2</div></div>
-      <div class="gallery-item"><div class="ph">IMAGE 3</div></div>
-      <div class="gallery-item"><div class="ph">IMAGE 4</div></div>
+      <div class="gallery-item"><img src="images/design/cafe-beth-1.jpg" alt="Cafe Beth interior"></div>
+      <div class="gallery-item"><img src="images/design/cafe-beth-2.jpg" alt="Cafe Beth interior"></div>
+      <div class="gallery-item"><img src="images/design/cafe-beth-3.jpg" alt="Cafe Beth interior"></div>
+      <div class="gallery-item"><img src="images/design/cafe-beth-4.jpg" alt="Cafe Beth interior"></div>
+      <div class="gallery-item"><img src="images/design/cafe-beth-5.jpg" alt="Cafe Beth interior"></div>
+      <div class="gallery-item"><img src="images/design/cafe-beth-6.jpg" alt="Cafe Beth interior"></div>
+      <div class="gallery-item"><img src="images/design/cafe-beth-7.jpg" alt="Cafe Beth interior"></div>
+      <div class="gallery-item"><img src="images/design/cafe-beth-8.jpg" alt="Cafe Beth interior"></div>
+      <div class="gallery-item"><img src="images/design/cafe-beth-9.jpg" alt="Cafe Beth interior"></div>
+      <div class="gallery-item"><img src="images/design/cafe-beth-10.jpg" alt="Cafe Beth interior"></div>
     </div>
   </section>
 

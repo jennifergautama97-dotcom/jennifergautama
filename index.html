@@ -418,25 +418,51 @@
   }
   .design-strip {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
   }
   .design-tile {
-    aspect-ratio: 4/5;
+    position: relative;
+    aspect-ratio: 3/2;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
     background: var(--paper-dim);
-    border: 1px dashed var(--line);
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.7rem;
-    color: var(--ink-soft);
-    text-align: center;
-    padding: 10px;
+    align-items: flex-end;
     transition: border-color 0.15s;
   }
-  .design-tile:hover {
-    border-color: var(--rose);
+  .design-tile img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
   }
+  .design-tile:hover img { transform: scale(1.04); }
+  .design-tile-cap {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding: 16px 14px 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--paper);
+    background: linear-gradient(to top, rgba(43, 36, 34, 0.72), rgba(43, 36, 34, 0));
+  }
+  .design-tile.placeholder {
+    border-style: dashed;
+    align-items: center;
+    justify-content: center;
+  }
+  .design-tile.placeholder .design-tile-cap {
+    background: none;
+    color: var(--ink-soft);
+    text-align: center;
+    font-weight: 500;
+  }
+  .design-tile:hover { border-color: var(--rose); }
   .behance-callout {
     margin-top: 36px;
     padding-top: 32px;
@@ -513,7 +539,7 @@
     .level-dot { left: -4.5px; }
     .level-content { margin-left: 0; padding-left: 20px; }
     .projects { grid-template-columns: 1fr; }
-    .design-strip { grid-template-columns: repeat(2, 1fr); }
+    .design-strip { grid-template-columns: 1fr; }
     .section-head { flex-direction: column; gap: 8px; align-items: flex-start; }
   }
 
@@ -720,10 +746,13 @@
     <p class="design-note">Freelance interior design practice alongside product work — full material specification, factory-direct procurement, and on-site execution. These days it's mostly for friends and acquaintances, something I do for the love of it that keeps my creative instincts sharp. It also doubles as a quiet kind of R&D: every project is a chance to find better ways of talking with customers and tightening my own workflow, lessons that find their way back into how I build product.</p>
 
     <div class="design-strip">
-      <a class="design-tile" href="cafe-beth.html">Cafe Beth — Upper Thomson</a>
-      <a class="design-tile" href="design-project.html">Residential — Kitchen renovation</a>
-      <a class="design-tile" href="design-project.html">Residential — Wardrobe wall</a>
-      <a class="design-tile" href="design-project.html">Residential — Bathroom renovation</a>
+      <a class="design-tile" href="cafe-beth.html">
+        <img src="images/design/cafe-beth-hero.jpg" alt="Cafe Beth — Upper Thomson cafe and wine bar interior">
+        <span class="design-tile-cap">Cafe Beth — Upper Thomson</span>
+      </a>
+      <div class="design-tile placeholder">
+        <span class="design-tile-cap">More projects coming soon</span>
+      </div>
     </div>
 
     <div class="behance-callout">

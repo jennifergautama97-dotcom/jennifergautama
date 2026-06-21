@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Title — Interior Design — Jennifer Gautama</title>
+<style>
+  :root {
+    --paper: #FAF6F4;
+    --paper-dim: #F2E9E5;
+    --ink: #2B2422;
+    --ink-soft: #897A75;
+    --line: #E8DCD6;
+    --rose: #B26A5E;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--rose); color: var(--paper); }
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- NAV ---------- */
+  nav.topnav {
+    position: sticky;
+    top: 0;
+    background: rgba(250, 246, 244, 0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+    z-index: 50;
+  }
+  .topnav-wrap {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+  }
+  .back-link {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .back-link:hover { color: var(--rose); }
+  .topnav-mark {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  /* ---------- LAYOUT ---------- */
+  .proj-wrap {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---------- HERO ---------- */
+  .proj-hero {
+    padding-top: 64px;
+    padding-bottom: 40px;
+  }
+  .proj-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--rose);
+    border: 1px solid var(--rose);
+    padding: 4px 10px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+  .proj-title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    max-width: 16ch;
+    margin-bottom: 16px;
+  }
+  .proj-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    margin-top: 18px;
+  }
+  .proj-meta-item { font-size: 0.82rem; color: var(--ink-soft); }
+  .proj-meta-item strong { display: block; color: var(--ink); font-size: 0.95rem; font-weight: 600; margin-top: 2px; }
+
+  .proj-hero-shot {
+    margin-top: 40px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--paper-dim);
+  }
+  .proj-hero-shot img { width: 100%; display: block; }
+
+  /* ---------- DESCRIPTION ---------- */
+  .proj-desc {
+    padding: 16px 0 48px;
+    border-bottom: 1px solid var(--line);
+  }
+  .proj-desc p {
+    font-size: 1rem;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    max-width: 64ch;
+  }
+  .proj-desc p + p { margin-top: 16px; }
+  .proj-desc strong { color: var(--ink); font-weight: 600; }
+
+  /* ---------- GALLERY ---------- */
+  .proj-gallery-section { padding: 48px 0; }
+  .proj-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .gallery-item {
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--paper-dim);
+  }
+  .gallery-item img { width: 100%; display: block; }
+  /* a full-width row inside the gallery */
+  .gallery-item.wide { grid-column: 1 / -1; }
+
+  /* ---------- placeholder (template only — replace with <img>) ---------- */
+  .ph {
+    aspect-ratio: 4 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-soft);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    text-align: center;
+    border: 1px dashed var(--line);
+    padding: 12px;
+  }
+  .proj-hero-shot .ph { aspect-ratio: 16 / 9; }
+
+  /* ---------- FOOTER NAV ---------- */
+  .proj-footer-nav {
+    padding: 40px 0 88px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .btn {
+    display: inline-block;
+    padding: 12px 22px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 2px;
+  }
+  .btn-primary { background: var(--ink); color: var(--paper); }
+  .btn-primary:hover { background: var(--rose); }
+  .btn-secondary { border: 1px solid var(--ink); color: var(--ink); }
+  .btn-secondary:hover { border-color: var(--rose); color: var(--rose); }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 720px) {
+    .proj-gallery { grid-template-columns: 1fr; }
+  }
+  a:focus-visible { outline: 2px solid var(--rose); outline-offset: 3px; }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-wrap">
+    <a class="back-link" href="index.html#design">&larr; Jennifer Gautama</a>
+    <div class="topnav-mark">Interior design</div>
+  </div>
+</nav>
+
+<div class="proj-wrap">
+
+  <header class="proj-hero">
+    <span class="proj-tag">Residential &middot; 2024</span>
+    <h1 class="proj-title">Project Title</h1>
+
+    <div class="proj-meta">
+      <div class="proj-meta-item">Type<strong>Residential</strong></div>
+      <div class="proj-meta-item">Scope<strong>Design &amp; on-site execution</strong></div>
+      <div class="proj-meta-item">Year<strong>2024</strong></div>
+    </div>
+
+    <div class="proj-hero-shot">
+      <!-- Replace this placeholder with: <img src="images/design/PROJECT-hero.jpg" alt="..."> -->
+      <div class="ph">HERO IMAGE</div>
+    </div>
+  </header>
+
+  <section class="proj-desc">
+    <p>A short description of the project goes here &mdash; what the brief was, what you set out to achieve, the materials and approach, and how it turned out. Keep it to a paragraph or two.</p>
+    <p>A second optional paragraph for any extra detail &mdash; a problem you solved, a material choice you&rsquo;re proud of, or what the client wanted.</p>
+  </section>
+
+  <section class="proj-gallery-section">
+    <div class="proj-gallery">
+      <!-- Replace each placeholder with: <div class="gallery-item"><img src="images/design/PROJECT-1.jpg" alt="..."></div> -->
+      <div class="gallery-item"><div class="ph">IMAGE 1</div></div>
+      <div class="gallery-item"><div class="ph">IMAGE 2</div></div>
+      <div class="gallery-item"><div class="ph">IMAGE 3</div></div>
+      <div class="gallery-item"><div class="ph">IMAGE 4</div></div>
+      <!-- Use class="gallery-item wide" for a full-width image -->
+    </div>
+  </section>
+
+  <div class="proj-footer-nav">
+    <a class="btn btn-secondary" href="index.html#design">&larr; Back to design work</a>
+    <a class="btn btn-primary" href="index.html#contact">Get in touch</a>
+  </div>
+
+</div>
+
+</body>
+</html>

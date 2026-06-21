@@ -80,6 +80,27 @@
     transition: color 0.15s;
   }
   .nav-links a:hover { color: var(--rose); }
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: 0;
+    padding: 8px;
+    margin: -8px -8px -8px 0;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--ink);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
   /* ---------- HERO ---------- */
   header.hero {
@@ -530,17 +551,29 @@
   /* ---------- PHONE ---------- */
   @media (max-width: 600px) {
     .wrap { padding: 0 20px; }
-    nav .wrap { gap: 14px; }
-    .nav-mark { font-size: 0.8rem; flex-shrink: 0; }
+    .nav-mark { font-size: 0.85rem; flex-shrink: 0; }
+    .nav-toggle { display: flex; }
     .nav-links {
-      gap: 16px;
-      min-width: 0;
-      overflow-x: auto;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      gap: 0;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 10px 20px rgba(43, 36, 34, 0.06);
+      padding: 4px 20px 14px;
+      display: none;
     }
-    .nav-links::-webkit-scrollbar { display: none; }
-    .nav-links a { font-size: 0.78rem; white-space: nowrap; }
+    .nav-links.open { display: flex; }
+    .nav-links a {
+      font-size: 0.95rem;
+      color: var(--ink);
+      padding: 13px 2px;
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-links a:last-child { border-bottom: none; }
     header.hero { padding: 52px 0 44px; }
     .hero-photo-wrap { width: 150px; }
     section { padding: 52px 0; }
@@ -577,7 +610,10 @@
 <nav>
   <div class="wrap">
     <div class="nav-mark">Jennifer Gautama</div>
-    <div class="nav-links">
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="nav-menu">
       <a href="#about">About</a>
       <a href="#work">Work</a>
       <a href="#education">Education</a>
@@ -797,6 +833,27 @@
     </div>
   </div>
 </footer>
+
+<script>
+  (function () {
+    var btn = document.querySelector('.nav-toggle');
+    var menu = document.getElementById('nav-menu');
+    if (!btn || !menu) return;
+    function close() {
+      menu.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Open menu');
+    }
+    btn.addEventListener('click', function () {
+      var open = menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    });
+    menu.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', close);
+    });
+  })();
+</script>
 
 </body>
 </html>

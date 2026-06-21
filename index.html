@@ -577,19 +577,21 @@
     header.hero { padding: 52px 0 44px; }
     .hero-photo-wrap { width: 150px; }
     section { padding: 52px 0; }
-    .elevation { padding-left: 24px; }
-    .elevation::before { left: 0; }
+    .elevation { padding-left: 0; }
+    .elevation::before { left: 4px; }
+    .level { padding-left: 28px; padding-bottom: 36px; }
     .level-mark {
       position: static;
       width: auto;
       height: auto;
       justify-content: flex-start;
       text-align: left;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
-    .level-tick { left: -1px; }
-    .level-dot { left: -4.5px; }
-    .level-content { margin-left: 0; padding-left: 20px; }
+    .level-mark .yr { color: var(--rose); font-weight: 600; }
+    .level-tick { display: none; }
+    .level-dot { left: 0.5px; top: 3px; }
+    .level-content { margin-left: 0; padding-left: 0; }
     .design-strip { grid-template-columns: 1fr; }
     .section-head { flex-direction: column; gap: 8px; align-items: flex-start; }
   }

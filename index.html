@@ -853,21 +853,55 @@
 
 <script>
   (function () {
+    var nav = document.querySelector('nav');
     var btn = document.querySelector('.nav-toggle');
     var menu = document.getElementById('nav-menu');
-    if (!btn || !menu) return;
-    function close() {
+
+    function closeMenu() {
+      if (!menu || !btn) return;
       menu.classList.remove('open');
       btn.setAttribute('aria-expanded', 'false');
       btn.setAttribute('aria-label', 'Open menu');
     }
-    btn.addEventListener('click', function () {
-      var open = menu.classList.toggle('open');
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    });
-    menu.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', close);
+    if (btn && menu) {
+      btn.addEventListener('click', function () {
+        var open = menu.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeMenu();
+      });
+    }
+
+    function easeInOutQuad(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+    function smoothScrollTo(targetY, duration) {
+      var startY = window.pageYOffset;
+      var diff = targetY - startY;
+      if (Math.abs(diff) < 2) return;
+      var startTime = null;
+      function step(now) {
+        if (startTime === null) startTime = now;
+        var t = Math.min((now - startTime) / duration, 1);
+        window.scrollTo(0, startY + diff * easeInOutQuad(t));
+        if (t < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var hash = a.getAttribute('href');
+        if (!hash || hash.length < 2) return;
+        var target = document.querySelector(hash);
+        if (!target) return;
+        e.preventDefault();
+        closeMenu();
+        var navH = nav ? nav.offsetHeight : 0;
+        var top = target.getBoundingClientRect().top + window.pageYOffset - navH;
+        smoothScrollTo(top, 750);
+        if (history.pushState) history.pushState(null, '', hash);
+      });
     });
   })();
 </script>
